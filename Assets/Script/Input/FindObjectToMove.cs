@@ -10,6 +10,13 @@ public class FindObjectToMove : MonoBehaviour
 
     public GameObject gameObjectToMove;
 
+    SwipeDetection swipeDetection;
+
+    private void Start()
+    {
+        swipeDetection = FindObjectOfType<SwipeDetection>();
+    }
+
     void Update()
     {
         if (Input.touchCount == 1)
@@ -41,6 +48,7 @@ public class FindObjectToMove : MonoBehaviour
                     else if (hit.collider != null)
                     {
                         Debug.Log("Hit nothing");
+                        swipeDetection.ResetObjectToMove();
                         return;
                     }
 

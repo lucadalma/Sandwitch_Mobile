@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SwipeDetection : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class SwipeDetection : MonoBehaviour
     int moves;
 
     FindObjectToMove findObjectToMove;
+
+    [SerializeField]
+    List<GameObject> Ingredients;
 
     public GameObject gameObjectToMove;
 
@@ -53,19 +57,25 @@ public class SwipeDetection : MonoBehaviour
                 if ((fp.x - lp.x) > 80) // left swipe
                 {
                     Debug.Log("left swipe here...");
-                    gameObjectToMove.transform.Translate(Vector3.left * 10);
+                    gameObjectToMove.transform.Translate(Vector3.left);
                     moved = true;
                 }
                 else if ((fp.x - lp.x) < -80) // right swipe
                 {
+                    gameObjectToMove.transform.Translate(Vector3.right);
+                    moved = true;
                     Debug.Log("right swipe here...");
                 }
                 else if ((fp.y - lp.y) < -80) // up swipe
                 {
+                    gameObjectToMove.transform.Translate(new Vector3(0,0,1));
+                    moved = true;
                     Debug.Log("up swipe here...");
                 }
                 else if ((fp.y - lp.y) > 80) // down swipe
                 {
+                    gameObjectToMove.transform.Translate(new Vector3(0,0,-1));
+                    moved = true;
                     Debug.Log("down swipe here...");
                 }
             }
@@ -81,6 +91,8 @@ public class SwipeDetection : MonoBehaviour
             moved = false;
         }
     }
+
+
 }
 
 
