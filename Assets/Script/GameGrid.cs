@@ -10,7 +10,7 @@ public class GameGrid : MonoBehaviour
     private float GridSpaceSize = 1f;
 
     [SerializeField] private GameObject gridCellPrefab;
-    private GameObject[,] gameGrid;
+    public GameObject[,] gameGrid;
 
     void Start()
     {
@@ -24,17 +24,16 @@ public class GameGrid : MonoBehaviour
 
         if (gridCellPrefab == null) 
         {
-            Debug.LogError("Error: Grid Cell Prefab on the Game grid is not assigned");
             return;
         }
 
-        for (int y = 0; y < height; y++) 
+        for (int z = 0; z < height; z++) 
         {
             for (int x = 0; x < width; x++)
             {
-                gameGrid[x, y] = Instantiate(gridCellPrefab, new Vector3(x * GridSpaceSize, 0 , y * GridSpaceSize), Quaternion.identity);
-                gameGrid[x, y].transform.parent = transform;
-                gameGrid[x, y].gameObject.name = "Grid Space ( X: " + x.ToString() + " , Y: " + y.ToString() + ")";
+                gameGrid[x, z] = Instantiate(gridCellPrefab, new Vector3(x * GridSpaceSize, 0 , z * GridSpaceSize), Quaternion.identity);
+                gameGrid[x, z].transform.parent = transform;
+                gameGrid[x, z].gameObject.name = "Grid Space ( X: " + x.ToString() + " , Z: " + z.ToString() + ")";
             }        
         }
     }

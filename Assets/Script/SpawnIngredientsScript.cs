@@ -17,13 +17,18 @@ public class SpawnIngredientsScript : MonoBehaviour
     [SerializeField]
     GameObject salame;
 
-    void Start()
+    GameGrid gameGridManager;
+
+    private void Start()
+    {
+        gameGridManager = FindObjectOfType<GameGrid>();
+    }
+
+    private void Update()
     {
         
     }
 
-    void Update()
-    {
-        
-    }
+
+
 }
