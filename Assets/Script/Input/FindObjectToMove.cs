@@ -10,11 +10,11 @@ public class FindObjectToMove : MonoBehaviour
 
     public GameObject gameObjectToMove;
 
-    SwipeDetection swipeDetection;
+    SwipeDetector swipeDetector;
 
     private void Start()
     {
-        swipeDetection = FindObjectOfType<SwipeDetection>();
+        swipeDetector = FindObjectOfType<SwipeDetector>();
     }
 
     void Update()
@@ -29,7 +29,7 @@ public class FindObjectToMove : MonoBehaviour
                 ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
                 Debug.DrawLine(ray.origin, ray.direction * 10);
 
-                if (Physics.Raycast(ray, out hit, mask))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
 
                     if (hit.collider != null && hit.transform.CompareTag("Ingridients"))
@@ -48,7 +48,7 @@ public class FindObjectToMove : MonoBehaviour
                     else if (hit.collider != null)
                     {
                         Debug.Log("Hit nothing");
-                        swipeDetection.ResetObjectToMove();
+                        swipeDetector.ResetObjectToMove();
                         return;
                     }
 

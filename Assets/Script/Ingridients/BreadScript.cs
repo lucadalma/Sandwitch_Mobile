@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class BreadScript : MonoBehaviour
 {
-    [SerializeField]
-    private 
+
+    public int childCount;
 
     void Start()
     {
