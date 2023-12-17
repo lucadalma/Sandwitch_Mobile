@@ -235,7 +235,7 @@ public class SwipeDetector : MonoBehaviour
         if (objToMove.transform.childCount > 1)
         {
             List<GameObject> childs = new List<GameObject>();
-            for (int i = 0; i < objToMove.transform.childCount - 1; i++)
+            for (int i = 0; i < objToMove.transform.childCount; i++)
             {
                 childs.Add(objToMove.transform.GetChild(i).gameObject);
                 if (childs[i].transform.childCount > 1) 
