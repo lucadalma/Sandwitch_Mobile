@@ -47,7 +47,7 @@ public class FindObjectToMove : MonoBehaviour
                     }
                     else if (hit.collider != null)
                     {
-                        Debug.Log("Hit nothing");
+                        //Debug.Log("Hit nothing");
                         swipeDetector.ResetObjectToMove();
                         return;
                     }

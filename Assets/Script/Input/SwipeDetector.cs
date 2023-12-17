@@ -120,7 +120,7 @@ public class SwipeDetector : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Swipe UP");
+        //Debug.Log("Swipe UP");
         MoveObject(gameObjectToMove, Vector3.forward);
         moved = true;
     }
@@ -131,7 +131,7 @@ public class SwipeDetector : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Swipe Down");
+        //Debug.Log("Swipe Down");
         MoveObject(gameObjectToMove, Vector3.back);
         moved = true;
     }
@@ -142,7 +142,7 @@ public class SwipeDetector : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Swipe Left");
+        //Debug.Log("Swipe Left");
         MoveObject(gameObjectToMove, Vector3.left);
         moved = true;
     }
@@ -153,7 +153,7 @@ public class SwipeDetector : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Swipe Right");
+        //Debug.Log("Swipe Right");
         MoveObject(gameObjectToMove, Vector3.right);
         moved = true;
     }
@@ -168,12 +168,13 @@ public class SwipeDetector : MonoBehaviour
         }
     }
 
-    public void MoveObject(GameObject objToMove, Vector3 direction) 
+    public void MoveObject(GameObject objToMove, Vector3 direction)
     {
         GameObject nearestObject;
 
+        int ObjTargetChildCount = 0;
+        int ObjToMoveChildCount = 0;
 
-        bool canMove;
 
         float step = 100f * Time.deltaTime;
 
@@ -185,41 +186,92 @@ public class SwipeDetector : MonoBehaviour
             Vector3 positionNearestObject = nearestObject.transform.position;
 
             Debug.DrawRay(objToMove.transform.position, direction * hit.distance, Color.yellow);
-            Debug.Log("Did Hit: " + nearestObject.name);
+            //Debug.Log("Did Hit: " + nearestObject.name);
 
             if (isMoving)
                 return;
 
+            ObjTargetChildCount = nearestObject.transform.childCount;
+            ObjToMoveChildCount = objToMove.transform.childCount;
+            GameObject lastChild = nearestObject.transform.GetChild(ObjTargetChildCount - 1).gameObject;
 
-            StartCoroutine(RotateIngridient(objToMove, direction));
-
-            objToMove.transform.SetParent(nearestObject.transform);
-            objToMove.layer = 9;
-
+            StartCoroutine(RotateIngridient(objToMove, nearestObject, direction, lastChild, ObjTargetChildCount, ObjToMoveChildCount));
 
             
+
+
+
+            Debug.Log(lastChild.name);
 
         }
     }
 
-    IEnumerator RotateIngridient(GameObject objToMove, Vector3 direction) 
+    IEnumerator RotateIngridient(GameObject objToMove, GameObject nearestObj, Vector3 direction, GameObject lastChild, int ObjTargetChildCount, int ObjToMoveChildCount)
     {
+
+
         isMoving = true;
         float remainingAngle = 180;
         Vector3 rotationCenter = objToMove.transform.position + direction / 2 + Vector3.up / 5;
         Vector3 rotationAxis = Vector3.Cross(Vector3.up, direction);
 
-        Debug.Log("Entrato");
+        //Debug.Log("Entrato");
 
-        while (remainingAngle > 0) 
+        while (remainingAngle > 0)
         {
             float rotationAngle = Mathf.Min(Time.deltaTime * 300, remainingAngle);
             objToMove.transform.RotateAround(rotationCenter, rotationAxis, rotationAngle);
             remainingAngle -= rotationAngle;
             yield return null;
+
+
         }
 
+
         isMoving = false;
+
+        bool strangeCase = false;
+
+        if (objToMove.transform.childCount > 1)
+        {
+            List<GameObject> childs = new List<GameObject>();
+            for (int i = 0; i < objToMove.transform.childCount - 1; i++)
+            {
+                childs.Add(objToMove.transform.GetChild(i).gameObject);
+                if (childs[i].transform.childCount > 1) 
+                {
+                    strangeCase = true;
+                }
+
+            }
+        }
+
+        Debug.Log("StrangeCase: " + strangeCase);
+
+        if (ObjToMoveChildCount > 1 && strangeCase)
+        {
+
+
+            float numberOfIncrementation = objToMove.transform.hierarchyCount / 2;
+            Debug.Log(numberOfIncrementation);
+
+
+            objToMove.transform.position = new Vector3(objToMove.transform.position.x,
+                lastChild.transform.position.y + (0.25f * numberOfIncrementation), objToMove.transform.position.z);
+        }
+        else if (ObjToMoveChildCount > 1 && !strangeCase)
+        {
+            objToMove.transform.position = new Vector3(objToMove.transform.position.x,
+                lastChild.transform.position.y + (0.25f * ObjToMoveChildCount), objToMove.transform.position.z);
+        }
+        else
+        {
+            objToMove.transform.position = new Vector3(objToMove.transform.position.x,
+                lastChild.transform.position.y + 0.25f, objToMove.transform.position.z);
+        }
+
+        objToMove.transform.SetParent(nearestObj.transform);
+        objToMove.layer = 9;
 
 
     }

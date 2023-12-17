@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1389929775690455314}
   - component: {fileID: 1389929775690455309}
   - component: {fileID: 1389929775690455308}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Salame
   m_TagString: Ingridients
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 1775417589339627561}
   - component: {fileID: 3757485824016081045}
   - component: {fileID: 7587181623586742420}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Ingridients
   m_Icon: {fileID: 0}
