@@ -26,6 +26,7 @@ public class FindObjectToMove : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
+
                 ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
                 Debug.DrawLine(ray.origin, ray.direction * 10);
 

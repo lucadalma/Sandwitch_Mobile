@@ -13,6 +13,8 @@ public class SwipeDetector : MonoBehaviour
 
     public List<GameObject> Ingridients;
 
+    public List<GameObject> Breads;
+
     bool isMoving = false;
 
     bool moved;
@@ -29,7 +31,6 @@ public class SwipeDetector : MonoBehaviour
         moved = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -43,7 +44,6 @@ public class SwipeDetector : MonoBehaviour
                 fingerDown = touch.position;
             }
 
-            //Detects Swipe while finger is still moving
             if (touch.phase == TouchPhase.Moved)
             {
                 if (!detectSwipeOnlyAfterRelease)
@@ -179,7 +179,6 @@ public class SwipeDetector : MonoBehaviour
         float step = 100f * Time.deltaTime;
 
         RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(objToMove.transform.position, direction, out hit, 1.1f))
         {
             nearestObject = hit.collider.gameObject;
@@ -195,11 +194,40 @@ public class SwipeDetector : MonoBehaviour
             ObjToMoveChildCount = objToMove.transform.childCount;
             GameObject lastChild = nearestObject.transform.GetChild(ObjTargetChildCount - 1).gameObject;
 
-            StartCoroutine(RotateIngridient(objToMove, nearestObject, direction, lastChild, ObjTargetChildCount, ObjToMoveChildCount));
+            bool canMoveBread = false;
 
+            if (objToMove.transform.name == "Bread")
+            {
+                if (nearestObject.transform.name != "Bread")
+                {
+                    canMoveBread = false;
+                }
+                else if (nearestObject.transform.name == "Bread")
+                {
+                    if ((objToMove.transform.hierarchyCount / 2) + (nearestObject.transform.hierarchyCount / 2) >= Ingridients.Count)
+                    {
+                        canMoveBread = true;
+                    }
+                }
+                else
+                {
+                    canMoveBread = false;
+                }
+            }
+            else 
+            {
+                canMoveBread = false;
+            }
+
+            if (objToMove.transform.name == "Bread" && canMoveBread == false)
+            {
+                Debug.Log("Non puoi spostare il pane");
+            }
+            else 
+            {
+                StartCoroutine(RotateIngridient(objToMove, nearestObject, direction, lastChild, ObjTargetChildCount, ObjToMoveChildCount));
             
-
-
+            }
 
             Debug.Log(lastChild.name);
 
@@ -275,5 +303,8 @@ public class SwipeDetector : MonoBehaviour
 
 
     }
+
+
+
 
 }
