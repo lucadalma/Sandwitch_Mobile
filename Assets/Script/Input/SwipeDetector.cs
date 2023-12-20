@@ -204,7 +204,7 @@ public class SwipeDetector : MonoBehaviour
                 }
                 else if (nearestObject.transform.name == "Bread")
                 {
-                    if ((objToMove.transform.hierarchyCount / 2) + (nearestObject.transform.hierarchyCount / 2) >= Ingridients.Count)
+                    if ((objToMove.transform.hierarchyCount / 2) - 1 + (nearestObject.transform.hierarchyCount / 2) - 1 >= Ingridients.Count)
                     {
                         canMoveBread = true;
                     }
