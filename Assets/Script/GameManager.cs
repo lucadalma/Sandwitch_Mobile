@@ -8,13 +8,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject youWinText;
 
+    [SerializeField]
+    GameObject ButtonUndo;
+
     SwipeDetector swipeDetector;
 
     int numberIngredients;
     int numberBreads;
 
+
     void Start()
     {
+
         swipeDetector = FindObjectOfType<SwipeDetector>();
 
         numberIngredients = swipeDetector.Ingridients.Count;
@@ -28,6 +33,7 @@ public class GameManager : MonoBehaviour
             if ((bread.transform.hierarchyCount / 2) - 1 == numberIngredients + numberBreads - 1) 
             {
                 youWinText.SetActive(true);
+                ButtonUndo.SetActive(false);
                 //Game Win
                 Debug.Log("GAME WIN");
             }

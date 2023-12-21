@@ -22,10 +22,15 @@ public class SwipeDetector : MonoBehaviour
 
     FindObjectToMove findObjectToMove;
 
+
+    UndoManager undoManager;
+
     public GameObject gameObjectToMove;
 
     private void Start()
     {
+        undoManager = FindObjectOfType<UndoManager>();
+
         findObjectToMove = FindObjectOfType<FindObjectToMove>();
 
         moved = false;
@@ -255,7 +260,7 @@ public class SwipeDetector : MonoBehaviour
 
         }
 
-
+        undoManager.MemorizeHistory();
         isMoving = false;
 
         bool strangeCase = false;
