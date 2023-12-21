@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc78a11072c6ece43a92eab5185ae3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oggettiInGriglia:
+  mouvableIngredients:
   - {fileID: 1553567566}
   - {fileID: 882744919}
   - {fileID: 2123983506}
@@ -563,7 +563,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 250094415}
         m_TargetAssemblyTypeName: UndoManager, Assembly-CSharp
-        m_MethodName: AnnullaUltimaMossa
+        m_MethodName: DeleteLastMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1269,6 +1269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   youWinText: {fileID: 820443151}
+  ButtonUndo: {fileID: 661999006}
 --- !u!4 &1635962448
 Transform:
   m_ObjectHideFlags: 0

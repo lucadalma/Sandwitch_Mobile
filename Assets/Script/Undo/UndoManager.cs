@@ -8,15 +8,6 @@ public class UndoManager : MonoBehaviour
     public List<GameObject> mouvableIngredients = new List<GameObject>();
 
 
-    private struct InformationsGameObject
-    {
-        public GameObject gameObj;
-        public Vector3 position;
-        public Quaternion rotation;
-        public Transform parent;
-        public LayerMask layer;
-    }
-
     void Start()
     {
         MemorizeHistory();
@@ -64,4 +55,13 @@ public class UndoManager : MonoBehaviour
             objInformation.gameObj.layer = objInformation.layer;
         }
     }
+}
+
+public struct InformationsGameObject
+{
+    public GameObject gameObj;
+    public Vector3 position;
+    public Quaternion rotation;
+    public Transform parent;
+    public LayerMask layer;
 }
