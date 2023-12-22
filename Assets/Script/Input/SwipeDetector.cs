@@ -306,11 +306,5 @@ public class SwipeDetector : MonoBehaviour
         objToMove.transform.SetParent(nearestObj.transform);
         objToMove.layer = 9;
         undoManager.MemorizeHistory();
-
-
     }
-
-
-
-
 }
