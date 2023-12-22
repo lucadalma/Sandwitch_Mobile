@@ -260,7 +260,7 @@ public class SwipeDetector : MonoBehaviour
 
         }
 
-        undoManager.MemorizeHistory();
+        
         isMoving = false;
 
         bool strangeCase = false;
@@ -305,6 +305,7 @@ public class SwipeDetector : MonoBehaviour
 
         objToMove.transform.SetParent(nearestObj.transform);
         objToMove.layer = 9;
+        undoManager.MemorizeHistory();
 
 
     }
