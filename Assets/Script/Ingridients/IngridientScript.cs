@@ -4,17 +4,5 @@ using UnityEngine;
 
 public class IngridientScript : MonoBehaviour
 {
-    public int childCount;
 
-
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
 }

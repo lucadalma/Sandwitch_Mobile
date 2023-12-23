@@ -7,15 +7,4 @@ using UnityEngine;
 public class BreadScript : MonoBehaviour
 {
 
-    public int childCount;
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }
