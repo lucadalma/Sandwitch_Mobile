@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
         //per ogni oggetto pane controllo gli oggetti figli, se uno dei due pezzi ha come figli tutti gli altri ingredienti più l'altro pezzo di pane, vuol dire che il player ha vinto
         foreach (GameObject bread in swipeDetector.Breads)
         {

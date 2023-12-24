@@ -257,6 +257,8 @@ public class SwipeDetector : MonoBehaviour
             //se posso muovere il pane o se l'oggetto che voglio muovere è un igrediente qualsiasi
             else 
             {
+                //gli aggiorno la layerMask
+                objToMove.layer = 9;
                 //inizio una coroutine per ruotare l'ingrediente
                 StartCoroutine(RotateIngridient(objToMove, nearestObject, direction, lastChild, ObjTargetChildCount, ObjToMoveChildCount));
             
@@ -354,8 +356,6 @@ public class SwipeDetector : MonoBehaviour
 
         //l'oggetto che muovo diventa figlio di quello destinazione
         objToMove.transform.SetParent(nearestObj.transform);
-        //gli aggiorno la layerMask
-        objToMove.layer = 9;
         //aggiorno la storia dei movimenti
         undoManager.MemorizeHistory();
     }
